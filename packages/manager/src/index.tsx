@@ -22,6 +22,11 @@ import store from 'src/store';
 import './index.css';
 import LinodeThemeWrapper from './LinodeThemeWrapper';
 
+import '@manifoldco/ui/dist/manifold/manifold.css';
+import(
+  /* webpackChunkName: "manifold-ui" */ '@manifoldco/ui/dist/loader'
+).then(({ defineCustomElements }) => defineCustomElements(window));
+
 import SplashScreen from 'src/components/SplashScreen';
 
 const Lish = DefaultLoader({

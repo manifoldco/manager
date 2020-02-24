@@ -154,14 +154,14 @@ module.exports = {
           {
             test: /\.(ts|tsx)$/,
             include: paths.appSrc,
-            exclude:[/(stories|test)\.(ts|tsx)$/, /__data__/],
+            exclude: [/(stories|test)\.(ts|tsx)$/, /__data__/],
             use: [
               {
                 loader: require.resolve('ts-loader'),
                 options: {
                   // disable type checker - we will use it in fork plugin
                   transpileOnly: true,
-                  onlyCompileBundledFiles:true
+                  onlyCompileBundledFiles: true
                 }
               }
             ]
@@ -207,7 +207,7 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            exclude: [/\.mjs$/, /\.js$/, /\.html$/, /\.json$/],
             loader: require.resolve('file-loader'),
             options: {
               name: 'static/media/[name].[hash:8].[ext]'
