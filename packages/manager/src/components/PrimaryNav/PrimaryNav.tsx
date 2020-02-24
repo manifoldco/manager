@@ -58,7 +58,8 @@ type Entity =
   | 'Firewalls'
   | 'Account'
   | 'Dashboard'
-  | 'StackScripts';
+  | 'StackScripts'
+  | 'Marketplace';
 
 interface PrimaryLink {
   display: Entity;
@@ -266,7 +267,12 @@ export class PrimaryNav extends React.Component<CombinedProps, State> {
         href: '/images',
         key: 'images',
         icon: <Image className="small" />
-      }
+      },
+      {
+        display: 'Marketplace',
+        href: '/marketplace',
+        key: 'marketplace',
+      },
     ];
 
     const potentialMenuItemsToAdd = this.primaryNavManipulator();

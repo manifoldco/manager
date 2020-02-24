@@ -1855,6 +1855,14 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
+"@manifoldco/ui@^0.9.4":
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/@manifoldco/ui/-/ui-0.9.4.tgz#8b827cab04919c2c819cc7ebd4cb3916d75ee876"
+  integrity sha512-PmNJSmRVL70lGfd6GUut43hrv0rlz52BqwW3aRf8g1ksSjj+iUW7jHrCmkGkJzzIakIK4OaOrBTtP71kUUbY+w==
+  dependencies:
+    "@stencil/state-tunnel" "^1.0.1"
+    clipboard-polyfill "^2.8.6"
+
 "@material-ui/core@^4.4.2":
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.4.2.tgz#66a9423e533833d2867827e6fdf526adbdceb7c0"
@@ -2061,6 +2069,18 @@
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
   integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
+
+"@stencil/state-tunnel@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@stencil/state-tunnel/-/state-tunnel-1.0.1.tgz#21324f494ad719732505c8134099e415ac4c3c81"
+  integrity sha512-DYG8uROgL9hkjVTCtCfRBb0d3FwpiFB0muRrNZQ2X1Qo5hxMuNNji76/ILddqeq0AfgkKCW82xrMPDpy+rNIhQ==
+
+"@stencil/webpack@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@stencil/webpack/-/webpack-0.0.6.tgz#bf90e7351eda81e60952550aeaa1d3627865f7e1"
+  integrity sha512-GgJsqhXQiiV4CBLmlLpoRWbfrzlfCfE5gTec2OgGtFj9jrFWmHI3XPvviJaUaErzOY+dAFvYzSMZT1aEFjY0yQ==
+  dependencies:
+    typescript "^2.6.2"
 
 "@storybook/addon-actions@~5.3.7":
   version "5.3.9"
@@ -4291,9 +4311,9 @@ axe-core@3.3.1:
   integrity sha512-gw1T0JptHPF4AdLLqE8yQq3Z7YvsYkpFmFWd84r6hnq/QoKRr8icYHFumhE7wYl5TVIHgVlchMyJsAYh0CfwCQ==
 
 axe-core@^3.0.3, axe-core@^3.1.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.4.1.tgz#e42623918bb85b5ef674633852cb9029db0309c5"
-  integrity sha512-+EhIdwR0hF6aeMx46gFDUy6qyCfsL0DmBrV3Z+LxYbsOd8e1zBaPHa3f9Rbjsz2dEwSBkLw6TwML/CAIIAqRpw==
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.5.1.tgz#d8d5aaef73f003e8b766ea28bb078343f3622201"
+  integrity sha512-mwpDgPwWB+5kMHyLjlxh4w25ClJfqSxi+c6LQ4ix349TdCUctMwJNPTkhPD1qP9SYIjFgjeVpVZWCvK9oBGwCg==
 
 axios-mock-adapter@^1.15.0:
   version "1.16.0"
@@ -5691,6 +5711,11 @@ cli-width@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
   integrity sha1-/xnt6Kml5XkyQUewwR8PvLq+1jk=
+
+clipboard-polyfill@^2.8.6:
+  version "2.8.6"
+  resolved "https://registry.yarnpkg.com/clipboard-polyfill/-/clipboard-polyfill-2.8.6.tgz#19d27283f11f2933bb18737263b98b8c95b5a0f7"
+  integrity sha512-kz/1ov+PXsBpGnW9XJH3dLWdYj12FpXqO89Dngm/GRPoI36E/tnYs6N0YPTEhxM9WHAlFiN5eoyIVuv5nzKXvg==
 
 clipboard@^2.0.0:
   version "2.0.4"
@@ -17997,6 +18022,11 @@ typescript-fsa@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/typescript-fsa/-/typescript-fsa-3.0.0.tgz#3ad1cb915a67338e013fc21f67c9b3e0e110c912"
   integrity sha512-xiXAib35i0QHl/+wMobzPibjAH5TJLDj+qGq5jwVLG9qR4FUswZURBw2qihBm0m06tHoyb3FzpnJs1GRhRwVag==
+
+typescript@^2.6.2:
+  version "2.9.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
+  integrity sha512-Gr4p6nFNaoufRIY4NMdpQRNmgxVIGMs4Fcu/ujdYk3nAZqk7supzBE9idmvfZIlH/Cuj//dvi+019qEue9lV0w==
 
 typescript@^3.0.3, typescript@^3.2.1:
   version "3.6.4"

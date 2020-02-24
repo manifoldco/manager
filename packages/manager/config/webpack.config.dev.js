@@ -30,6 +30,7 @@ const env = getClientEnvironment(publicUrl);
 
 /* tslint:disable:object-literal-sort-keys */
 module.exports = {
+  externals: [ '@manifoldco/ui' ],
   mode: 'development',
   // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
   // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
@@ -236,8 +237,6 @@ module.exports = {
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
     new webpack.DefinePlugin(env.stringified),
-    // This is necessary to emit hot updates (currently CSS only):
-    new webpack.HotModuleReplacementPlugin(),
     // Watcher doesn't work well if you mistype casing in a path so we use
     // a plugin that prints an error when you attempt to do this.
     // See https://github.com/facebookincubator/create-react-app/issues/240
@@ -271,7 +270,7 @@ module.exports = {
       allowAsyncCycles: false,
       // set the current working directory for displaying module paths
       cwd: paths.appSrc
-    })
+    }),
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

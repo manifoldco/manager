@@ -213,6 +213,10 @@ const Firewalls = DefaultLoader({
   loader: () => import('src/features/Firewalls')
 });
 
+const Marketplace = DefaultLoader({
+  loader: () => import('src/features/Marketplace')
+});
+
 const MainContent: React.FC<CombinedProps> = props => {
   const classes = useStyles();
 
@@ -365,6 +369,7 @@ const MainContent: React.FC<CombinedProps> = props => {
                         {props.flags.firewalls && (
                           <Route path="/firewalls" component={Firewalls} />
                         )}
+                         <Route path="/marketplace" component={Marketplace} />
                         <Redirect exact from="/" to="/dashboard" />
                         <Route component={NotFound} />
                       </Switch>

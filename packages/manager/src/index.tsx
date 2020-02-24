@@ -58,6 +58,7 @@ const renderLish = () => (
 
 const renderApp = (props: RouteComponentProps) => (
   <React.Fragment>
+    <script src="https://js.cdn.manifold.co/@manifoldco/ui/dist/manifold.js"></script>
     <SplashScreen />
     <LinodeThemeWrapper>
       {(toggle, spacing) => (
