@@ -200,6 +200,7 @@ class FromAppsContent extends React.PureComponent<CombinedProps, State> {
       imageDisplayInfo,
       regionDisplayInfo,
       typeDisplayInfo,
+      addonsDisplayInfo,
       backupsMonthlyPrice,
       userSSHKeys,
       sshError,
@@ -210,6 +211,7 @@ class FromAppsContent extends React.PureComponent<CombinedProps, State> {
       selectedStackScriptID,
       selectedStackScriptLabel,
       selectedTypeID,
+      selectManifoldAddon,
       selectedUDFs: udf_data,
       label,
       tags,
@@ -361,6 +363,7 @@ class FromAppsContent extends React.PureComponent<CombinedProps, State> {
             changeBackups={toggleBackupsEnabled}
             changePrivateIP={togglePrivateIPEnabled}
             updateFor={[privateIPEnabled, backupsEnabled, selectedTypeID]}
+            selectManifoldAddon={selectManifoldAddon}
             disabled={userCannotCreateLinode}
           />
         </Grid>
@@ -401,6 +404,10 @@ class FromAppsContent extends React.PureComponent<CombinedProps, State> {
                     typeDisplayInfo.backupsMonthly
                   )
                 );
+              }
+
+              if (addonsDisplayInfo) {
+                displaySections.push(addonsDisplayInfo);
               }
 
               let calculatedPrice = pathOr(0, ['monthly'], typeDisplayInfo);

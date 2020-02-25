@@ -194,6 +194,7 @@ export class FromStackScriptContent extends React.PureComponent<CombinedProps> {
       selectedStackScriptID,
       selectedTypeID,
       typeDisplayInfo,
+      addonsDisplayInfo,
       privateIPEnabled,
       tags,
       backupsEnabled,
@@ -215,6 +216,7 @@ export class FromStackScriptContent extends React.PureComponent<CombinedProps> {
       updateRegionID,
       updateTags,
       updateTypeID,
+      selectManifoldAddon,
       availableUserDefinedFields: userDefinedFields,
       availableStackScriptImages: compatibleImages,
       selectedUDFs: udf_data
@@ -355,6 +357,7 @@ export class FromStackScriptContent extends React.PureComponent<CombinedProps> {
             changeBackups={toggleBackupsEnabled}
             changePrivateIP={togglePrivateIPEnabled}
             updateFor={[privateIPEnabled, backupsEnabled, selectedTypeID]}
+            selectManifoldAddon={selectManifoldAddon}
             disabled={disabled}
           />
         </Grid>
@@ -401,6 +404,10 @@ export class FromStackScriptContent extends React.PureComponent<CombinedProps> {
                     backupsMonthlyPrice
                   )
                 );
+              }
+
+              if (addonsDisplayInfo) {
+                displaySections.push(addonsDisplayInfo);
               }
 
               let calculatedPrice = pathOr(0, ['monthly'], typeDisplayInfo);

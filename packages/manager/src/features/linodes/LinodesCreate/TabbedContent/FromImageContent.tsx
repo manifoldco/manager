@@ -103,9 +103,11 @@ export class FromImageContent extends React.PureComponent<CombinedProps> {
       typesData: types,
       regionsData: regions,
       imagesData: images,
+      selectManifoldAddon,
       imageDisplayInfo,
       regionDisplayInfo,
       typeDisplayInfo,
+      addonsDisplayInfo,
       backupsMonthlyPrice,
       userSSHKeys,
       sshError,
@@ -251,6 +253,7 @@ export class FromImageContent extends React.PureComponent<CombinedProps> {
               this.props.backupsEnabled,
               this.props.selectedTypeID
             ]}
+            selectManifoldAddon={selectManifoldAddon}
             disabled={userCannotCreateLinode}
           />
         </Grid>
@@ -299,6 +302,10 @@ export class FromImageContent extends React.PureComponent<CombinedProps> {
                     typeDisplayInfo.backupsMonthly
                   )
                 );
+              }
+
+              if (addonsDisplayInfo) {
+                displaySections.push(addonsDisplayInfo);
               }
 
               let calculatedPrice = pathOr(0, ['monthly'], typeDisplayInfo);

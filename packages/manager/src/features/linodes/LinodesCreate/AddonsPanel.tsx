@@ -88,12 +88,41 @@ interface Props {
   privateIP: boolean;
   changeBackups: () => void;
   changePrivateIP: () => void;
+  selectManifoldAddon: (label: string, name: string) => void;
   disabled?: boolean;
   hidePrivateIP?: boolean;
 }
 
 type CombinedProps = Props & WithStyles<ClassNames>;
 class AddonsPanel extends React.Component<CombinedProps> {
+  manifoldMarketplace: React.RefObject<HTMLManifoldMarketplaceElement> = React.createRef<HTMLManifoldMarketplaceElement>();
+
+  componentDidMount(): void {
+    if (this.manifoldMarketplace && this.manifoldMarketplace.current) {
+      this.manifoldMarketplace.current.addEventListener(
+        "manifold-marketplace-click",
+        this.selectManifoldAddon
+      );
+    }
+  }
+
+  componentWillUnmount(): void {
+    if (this.manifoldMarketplace && this.manifoldMarketplace.current) {
+      this.manifoldMarketplace.current.removeEventListener(
+        "manifold-marketplace-click",
+        this.selectManifoldAddon
+      );
+    }
+  }
+
+  selectManifoldAddon = (event: CustomEvent) => {
+    const { selectManifoldAddon } = this.props;
+
+    if (event.detail && event.detail.productLabel && event.detail.productName) {
+      selectManifoldAddon(event.detail.productLabel, event.detail.productName);
+    }
+  };
+
   renderBackupsPrice = () => {
     const { classes, backupsMonthly } = this.props;
     return (
@@ -117,79 +146,93 @@ class AddonsPanel extends React.Component<CombinedProps> {
     } = this.props;
 
     return (
-      <Paper className={classes.root} data-qa-add-ons>
-        <div className={classes.inner}>
-          <Typography variant="h2" className={classes.title}>
-            Optional Add-ons
-          </Typography>
-          <Grid container>
-            <Grid item xs={12}>
-              <FormControlLabel
-                className={classes.label}
-                control={
-                  <CheckBox
-                    checked={accountBackups || this.props.backups}
-                    onChange={changeBackups}
-                    disabled={accountBackups || disabled}
-                    data-qa-check-backups={
-                      accountBackups
-                        ? 'auto backup enabled'
-                        : 'auto backup disabled'
-                    }
-                  />
-                }
-                label="Backups"
-              />
-              {this.renderBackupsPrice()}
-              <Typography variant="body1" className={classes.caption}>
-                {accountBackups ? (
-                  <React.Fragment>
-                    You have enabled automatic backups for your account. This
-                    Linode will automatically have backups enabled. To change
-                    this setting,{' '}
-                    <Link to={'/account/settings'}>click here.</Link>
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-                    Three backup slots are executed and rotated automatically: a
-                    daily backup, a 2-7 day old backup, and an 8-14 day old
-                    backup. Plans are priced according to the Linode plan
-                    selected above.
-                  </React.Fragment>
-                )}
-              </Typography>
+      <React.Fragment>
+        <Paper className={classes.root} data-qa-add-ons>
+          <div className={classes.inner}>
+            <Typography variant="h2" className={classes.title}>
+              Optional Add-ons
+            </Typography>
+            <Grid container>
+              <Grid item xs={12}>
+                <FormControlLabel
+                  className={classes.label}
+                  control={
+                    <CheckBox
+                      checked={accountBackups || this.props.backups}
+                      onChange={changeBackups}
+                      disabled={accountBackups || disabled}
+                      data-qa-check-backups={
+                        accountBackups
+                          ? 'auto backup enabled'
+                          : 'auto backup disabled'
+                      }
+                    />
+                  }
+                  label="Backups"
+                />
+                {this.renderBackupsPrice()}
+                <Typography variant="body1" className={classes.caption}>
+                  {accountBackups ? (
+                    <React.Fragment>
+                      You have enabled automatic backups for your account. This
+                      Linode will automatically have backups enabled. To change
+                      this setting,{' '}
+                      <Link to={'/account/settings'}>click here.</Link>
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      Three backup slots are executed and rotated automatically: a
+                      daily backup, a 2-7 day old backup, and an 8-14 day old
+                      backup. Plans are priced according to the Linode plan
+                      selected above.
+                    </React.Fragment>
+                  )}
+                </Typography>
+              </Grid>
             </Grid>
-          </Grid>
-          {/** /v4/linodes/instances/clone does *not* support the private IP flag */
-          this.props.hidePrivateIP ? (
-            <React.Fragment />
-          ) : (
-            <React.Fragment>
-              <Grid container className={classes.divider}>
-                <Grid item xs={12}>
-                  <Divider />
+            {/** /v4/linodes/instances/clone does *not* support the private IP flag */
+            this.props.hidePrivateIP ? (
+              <React.Fragment />
+            ) : (
+              <React.Fragment>
+                <Grid container className={classes.divider}>
+                  <Grid item xs={12}>
+                    <Divider />
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid container>
-                <Grid item xs={12} className={classes.lastItem}>
-                  <FormControlLabel
-                    className={classes.label}
-                    control={
-                      <CheckBox
-                        checked={this.props.privateIP}
-                        onChange={() => changePrivateIP()}
-                        data-qa-check-private-ip
-                        disabled={disabled}
-                      />
-                    }
-                    label="Private IP"
-                  />
+                <Grid container>
+                  <Grid item xs={12} className={classes.lastItem}>
+                    <FormControlLabel
+                      className={classes.label}
+                      control={
+                        <CheckBox
+                          checked={this.props.privateIP}
+                          onChange={() => changePrivateIP()}
+                          data-qa-check-private-ip
+                          disabled={disabled}
+                        />
+                      }
+                      label="Private IP"
+                    />
+                  </Grid>
                 </Grid>
+              </React.Fragment>
+            )}
+          </div>
+        </Paper>
+        <Paper className={classes.root} data-qa-add-ons>
+          <div className={classes.inner}>
+            <Typography variant="h2" className={classes.title}>
+              Manifold Add-ons
+            </Typography>
+            <Grid container>
+              <Grid item xs={12}>
+                <manifold-marketplace ref={this.manifoldMarketplace} />
               </Grid>
-            </React.Fragment>
-          )}
-        </div>
-      </Paper>
+            </Grid>
+          </div>
+        </Paper>
+      </React.Fragment>
     );
   }
 }

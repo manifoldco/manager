@@ -31,6 +31,7 @@ export interface WithDisplayData {
   typeDisplayInfo?: TypeInfo;
   regionDisplayInfo?: Info;
   imageDisplayInfo?: Info;
+  addonsDisplayInfo?: Info;
   backupsMonthlyPrice?: number | null;
 }
 
@@ -92,6 +93,7 @@ export interface BaseFormStateAndHandlers {
   updateRegionID: (id: string) => void;
   selectedTypeID?: string;
   updateTypeID: (id: string) => void;
+  selectManifoldAddon: (label: string, name: string) => void;
   label: string;
   updateLabel: (
     event: React.ChangeEvent<

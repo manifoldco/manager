@@ -74,10 +74,16 @@ import { getRegionIDFromLinodeID } from './utilities';
 
 const DEFAULT_IMAGE = 'linode/debian10';
 
+interface SelectedAddon {
+  label: string;
+  name: string;
+}
+
 interface State {
   selectedImageID?: string;
   selectedRegionID?: string;
   selectedTypeID?: string;
+  selectedManifoldAddons?: SelectedAddon[];
   selectedLinodeID?: number;
   selectedBackupID?: number;
   availableUserDefinedFields?: UserDefinedField[];
@@ -126,6 +132,7 @@ const defaultState: State = {
   selectedStackScriptUsername: '',
   selectedRegionID: undefined,
   selectedTypeID: undefined,
+  selectedManifoldAddons: [],
   tags: [],
   formIsSubmitting: false,
   errors: undefined,
@@ -233,6 +240,22 @@ class LinodeCreateContainer extends React.PureComponent<CombinedProps, State> {
   setRegionID = (id: string) => this.setState({ selectedRegionID: id });
 
   setTypeID = (id: string) => this.setState({ selectedTypeID: id });
+
+  addManifoldAddon = (addon: SelectedAddon) => this.setState({
+    selectedManifoldAddons: this.state.selectedManifoldAddons ? [...this.state.selectedManifoldAddons, addon] : [addon]
+  });
+
+  removeManifoldAddon = (label: string) => this.setState({
+    selectedManifoldAddons: this.state.selectedManifoldAddons ? this.state.selectedManifoldAddons.filter(addon => addon.label !== label) : []
+  });
+
+  selectManifoldAddon = (label: string, name: string) => {
+    if (this.state.selectedManifoldAddons && this.state.selectedManifoldAddons.find(addon => addon.label === label)) {
+      this.removeManifoldAddon(label);
+    } else {
+      this.addManifoldAddon({ label, name });
+    }
+  };
 
   setLinodeID = (id: number, diskSize?: number) => {
     if (id !== this.state.selectedLinodeID) {
@@ -503,6 +526,19 @@ class LinodeCreateContainer extends React.PureComponent<CombinedProps, State> {
     return typeInfo;
   };
 
+  getAddonsInfo = (): Info | undefined => {
+    const { selectedManifoldAddons } = this.state;
+
+    if (!selectedManifoldAddons || !selectedManifoldAddons.length) {
+      return;
+    }
+
+    return {
+      title: "Selected Addons",
+      details: selectedManifoldAddons.map(addon => addon.name).join(", ")
+    };
+  };
+
   reshapeTypeInfo = (type?: ExtendedType): TypeInfo | undefined => {
     return (
       type && {
@@ -575,12 +611,14 @@ class LinodeCreateContainer extends React.PureComponent<CombinedProps, State> {
             regionDisplayInfo={this.getRegionInfo()}
             imageDisplayInfo={this.getImageInfo()}
             typeDisplayInfo={this.getTypeInfo()}
+            addonsDisplayInfo={this.getAddonsInfo()}
             backupsMonthlyPrice={this.getBackupsMonthlyPrice()}
             updateRegionID={this.setRegionID}
             updateImageID={this.setImageID}
             updateTypeID={this.setTypeID}
             updateLinodeID={this.setLinodeID}
             updateDiskSize={this.setDiskSize}
+            selectManifoldAddon={this.selectManifoldAddon}
             selectedUDFs={selectedUDFs}
             handleSelectUDFs={this.setUDFs}
             updateStackScript={this.setStackScript}

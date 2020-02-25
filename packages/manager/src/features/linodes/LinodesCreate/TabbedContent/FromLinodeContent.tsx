@@ -96,7 +96,9 @@ export class FromLinodeContent extends React.PureComponent<CombinedProps> {
       regionsData: regions,
       regionDisplayInfo: regionInfo,
       typeDisplayInfo: typeInfo,
+      addonsDisplayInfo,
       selectedTypeID,
+      selectManifoldAddon,
       privateIPEnabled,
       selectedRegionID,
       selectedLinodeID,
@@ -187,6 +189,7 @@ export class FromLinodeContent extends React.PureComponent<CombinedProps> {
                 changeBackups={this.props.toggleBackupsEnabled}
                 changePrivateIP={this.props.togglePrivateIPEnabled}
                 updateFor={[privateIPEnabled, backupsEnabled, selectedTypeID]}
+                selectManifoldAddon={selectManifoldAddon}
                 disabled={userCannotCreateLinode}
                 hidePrivateIP
               />
@@ -220,6 +223,10 @@ export class FromLinodeContent extends React.PureComponent<CombinedProps> {
                         typeInfo.backupsMonthly
                       )
                     );
+                  }
+
+                  if (addonsDisplayInfo) {
+                    displaySections.push(addonsDisplayInfo);
                   }
 
                   let calculatedPrice = pathOr(0, ['monthly'], typeInfo);

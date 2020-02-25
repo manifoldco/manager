@@ -380,7 +380,6 @@ const MainContent: React.FC<CombinedProps> = props => {
                       </React.Suspense>
                     </Grid>
                   </Grid>
-                  <manifold-product-card product-label="jawsdb-mysql" />
                 </main>
               </div>
 

@@ -207,11 +207,13 @@ export class FromBackupsContent extends React.Component<CombinedProps, State> {
       selectedDiskSize,
       selectedLinodeID,
       selectedTypeID,
+      selectManifoldAddon,
       setBackupID,
       togglePrivateIPEnabled,
       toggleBackupsEnabled,
       regionDisplayInfo,
       typeDisplayInfo,
+      addonsDisplayInfo,
       disabled,
       label,
       tags,
@@ -318,6 +320,7 @@ export class FromBackupsContent extends React.Component<CombinedProps, State> {
                 backupsMonthly={backupsMonthlyPrice}
                 privateIP={privateIPEnabled}
                 updateFor={[privateIPEnabled, backupsEnabled, selectedTypeID]}
+                selectManifoldAddon={selectManifoldAddon}
                 disabled={disabled}
               />
             </React.Fragment>
@@ -360,6 +363,10 @@ export class FromBackupsContent extends React.Component<CombinedProps, State> {
                       typeDisplayInfo.backupsMonthly
                     )
                   );
+                }
+
+                if (addonsDisplayInfo) {
+                  displaySections.push(addonsDisplayInfo);
                 }
 
                 let calculatedPrice = pathOr(0, ['monthly'], typeDisplayInfo);
