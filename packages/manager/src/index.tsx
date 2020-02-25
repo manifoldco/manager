@@ -26,6 +26,7 @@ import '@manifoldco/ui/dist/manifold/manifold.css';
 import(
   /* webpackChunkName: "manifold-ui" */ '@manifoldco/ui/dist/loader'
 ).then(({ defineCustomElements }) => defineCustomElements(window));
+import './manifold.css';
 
 import SplashScreen from 'src/components/SplashScreen';
 
